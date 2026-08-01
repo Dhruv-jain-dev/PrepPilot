@@ -9,7 +9,12 @@ PrepPilot AI is a multi-agent interview preparation platform built with Python, 
 - Resume Match Agent: match percentage, strong skills, missing skills, suggestions
 - Question Agent: personalised technical, behavioural, and company-focused questions
 - Evaluation Agent: answer scoring and targeted feedback
-- Interactive dashboard and progress chart
+- Structured interview scoring: technical, communication, and confidence dimensions
+- Adaptive follow-up questions that respond to the latest answer
+- ElevenLabs voice interview mode: spoken interviewer turns and recorded-answer transcription
+- Company-aware interview context (Amazon, Google, Microsoft, JP Morgan, NVIDIA)
+- ATS keyword-gap analysis and truthful resume-bullet rewriting
+- Interactive dashboard, weak-topic trends, and progress chart
 - PDF report download
 - MongoDB session history; resumes are saved in GridFS
 
@@ -18,8 +23,10 @@ PrepPilot AI is a multi-agent interview preparation platform built with Python, 
 ```text
 Streamlit UI -> Interview Manager
                     |- Resume/JD Match Agent
-                    |- Question Generator Agent (Gemini)
-                    |- Answer Evaluation Agent (Gemini)
+                    |- Resume / ATS Agent
+                    |- Question Generator Agent (company-aware Gemini)
+                    |- Answer Evaluation Agent (structured Gemini output)
+                    `- Adaptive Follow-up Agent
                     `- MongoDB / GridFS persistence
 ```
 
@@ -39,7 +46,12 @@ Set these values in `.env`:
 GEMINI_API_KEY=your_key
 MONGODB_URI=your_mongodb_atlas_connection_string
 MONGODB_DATABASE=preppilot
+ELEVENLABS_API_KEY=your_elevenlabs_key
+# Optional: a default ElevenLabs voice is used if this is not set.
+ELEVENLABS_VOICE_ID=your_voice_id
 ```
+
+In **Mock interview**, turn on **Voice conversation** to hear interviewer turns and record your answer. ElevenLabs Scribe transcribes the recording before it follows the same evaluation path as a typed answer.
 
 Run the app:
 
